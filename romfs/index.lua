@@ -164,7 +164,7 @@ batterylevel = System.getBatteryLife()
 function loadall()
 	Cookie = Graphics.loadImage(System.currentDirectory().."data/cookie.png")
 	Shine = Graphics.loadImage(System.currentDirectory().."data/shine.png")
-	Gradient = Graphics.loadImage(System.currentDirectory().."data/Gradient.png")	
+	Gradient = Graphics.loadImage(System.currentDirectory().."data/Gradient.png")
 	StoreHead = Graphics.loadImage(System.currentDirectory().."data/storehead.png")
 	ButtonsSheet = Graphics.loadImage(System.currentDirectory().."data/ButtonsSheet.png")
 	pressed = Graphics.loadImage(System.currentDirectory().."data/pressed.png")
@@ -188,7 +188,7 @@ CpS=0
 CpSCursor=0
 BACK={x=0,y=64}
 holdtoexit = 0
-startloading=0 
+startloading=0
 TOUCHALTER=0
 activatescreenshot=0
 status="BUY menu"
@@ -250,7 +250,7 @@ function alternativeclick()
 end
 function Cursor()
 	for i=1, CURSOR.count do
-		if i<=8 then 
+		if i<=8 then
 			Graphics.drawRotateImage(160, 120, cursor,-(CURSOR.rot+pi/4*i))
 		end
 	end
@@ -259,7 +259,7 @@ function BUFF(a,num,quan,b,k)
 	local c = a
 	if c.count<=quan and c.count>0 then
 		for i=1, c.count do
-			if i<=quan then 
+			if i<=quan then
 				Graphics.drawPartialImage(b+k*(i-1),12+BACK.y+71*c.currency-4, num, 0, 50, 50, ObjectsSheet)
 			end
 		end
@@ -290,8 +290,8 @@ function BUYMENUPLUSONE(a,num)
 		Graphics.drawImage(STORE.x, STORE.y+33*STORE.stat, pressed)
 		c.count=c.count+1
 		COOKIE.count=COOKIE.count-c.price
-		if c.currency==-1 and num>0 then 
-			c.currency = justcurrency 
+		if c.currency==-1 and num>0 then
+			c.currency = justcurrency
 			justcurrency = justcurrency+1
 		end
 	end
@@ -328,7 +328,7 @@ function continue()
 		FARM.currency = tonumber(savearray[8])
 		MINE.currency = tonumber(savearray[9])
 		justcurrency = tonumber(savearray[10])
-		FACTORY.count = tonumber(savearray[11]) or 0 
+		FACTORY.count = tonumber(savearray[11]) or 0
 		FACTORY.currency = tonumber(savearray[12]) or -1
 		BANK.count = tonumber(savearray[13]) or 0
 		BANK.currency = tonumber(savearray[14]) or -1
@@ -359,7 +359,7 @@ end
 function ScreenButton(xbut,ybut,i,st)
 	Buttons.sizex[i] = Graphics.getImageWidth(Buttons.texture[i])
 	Buttons.sizey[i] = Graphics.getImageHeight(Buttons.texture[i])
-	if TOUCHx == 0 and TOUCHy==0 then 
+	if TOUCHx == 0 and TOUCHy==0 then
 		if Buttons.dntch[st] == "YES" then
 			if st=="LOADALL" and CursorBuyIcon == nil then
 				loadall()
@@ -411,8 +411,8 @@ function ScreenButton(xbut,ybut,i,st)
 end
 function COUNTING(a,num)
 	local c = a
-	if STORE.stat==num then 
-		gpu_drawtext(125,210,"# "..c.count, white) 
+	if STORE.stat==num then
+		gpu_drawtext(125,210,"# "..c.count, white)
 		if status=="BUY menu" then
 			Price = c.price
 			elseif status=="SELL menu" then
@@ -436,7 +436,7 @@ while true do
 	Screen.refresh()
 	Screen.clear(TOP_SCREEN)
 	Screen.clear(BOTTOM_SCREEN)
-	
+
 	if loadmussic==1 then
 		Screen.debugPrint(0,220,"NOW LOADING...",white,TOP_SCREEN)
 		System.wait(1000)
@@ -580,7 +580,7 @@ while true do
 			else
 			WIZARDTWR.sellprice=math.ceil(330000000*1.15^(WIZARDTWR.count-1)/2)
 		end
-		CURSOR.price=15*1.15^CURSOR.count	
+		CURSOR.price=15*1.15^CURSOR.count
 		GRANDMA.price=100*1.15^GRANDMA.count
 		FARM.price=1000*1.15^FARM.count
 		MINE.price=12000*1.15^MINE.count
@@ -593,12 +593,12 @@ while true do
 		end
 		if Controls.check(pad,KEY_SELECT) and not Controls.check(oldpad,KEY_SELECT) and status=="BUY menu" then
 			status="SELL menu"
-			
+
 			elseif Controls.check(pad,KEY_SELECT) and not Controls.check(oldpad,KEY_SELECT) and status=="SELL menu" then
 			status="BUY menu"
-			
+
 		end
-		
+
 		if status=="BUY menu" then
 			gpu_drawtext(265, 187,"BUY", white)
 			gpu_drawtext(332, 187,"SELL", gray)
@@ -738,7 +738,7 @@ while true do
 		if TEMPLE.avupgrade == 1 and TEMPLE.upgrade == 1 then
 			UPGRADEMENU(TEMPLE,6,200000000,0)
 		end
-		
+
 		--gpu_drawtext(253, 61,"  press SELECT ", white)
 		if status=="BUY menu" then
 			if Price>COOKIE.count then
@@ -767,12 +767,6 @@ while true do
      		       elseif COOKIE.count>1000000 and COOKIE.count<1000000000000 then
         	    gpu_drawtext(5, 5, tostring((math.floor(math.floor(COOKIE.count)/1000)/1000))).." M  Cookies", white)
    		end
-			gpu_drawtext(5, 5,(math.floor(COOKIE.count)).."   Cookies", white)
-			elseif COOKIE.count>1000000 and COOKIE.count<1000000000 then
-			gpu_drawtext(5, 5,(math.floor(math.floor(COOKIE.count)/1000)/1000).." M  Cookies", white)
-			elseif COOKIE.count>1000000000 and COOKIE.count<1000000000000 then
-			gpu_drawtext(5, 5,(math.floor(math.floor(math.floor(COOKIE.count)/1000)/1000)/1000).." B Cookies", white)
-		end
 		gpu_drawtext(5, 30,"per   sec : "..CpS, white)
 		if string.len(Tm)==2 then
 			gpu_drawtext(5, 204,Th..": "..Tm, blue)
@@ -792,10 +786,10 @@ while true do
 		Cursor()
 		screenshotmake()
 		Graphics.termBlend()
-		if STORE.y<86+33*(-STORE.stat) then 
+		if STORE.y<86+33*(-STORE.stat) then
 			STORE.y=STORE.y+11
 		end
-		if STORE.y>86+33*(-STORE.stat) then 
+		if STORE.y>86+33*(-STORE.stat) then
 			STORE.y=STORE.y-11
 		end
 		if Controls.check(pad,KEY_DUP) and not Controls.check(oldpad,KEY_DUP) and STORE.stat>0 then
@@ -834,7 +828,7 @@ while true do
 		gpu_drawtext(0,25,"A    BILLIONAIRE",white)
 		gpu_drawtext(0,50,"THANKS    FOR    PLAYING",white)
 		gpu_drawtext(0,218,"PRESS    A    TO    END    GAME",white)
-		if Controls.check(pad,KEY_A) and Controls.check(oldpad,KEY_A) then 
+		if Controls.check(pad,KEY_A) and Controls.check(oldpad,KEY_A) then
 			save()
 			Cookie=nil
 			holdtoexit=0
@@ -857,7 +851,7 @@ while true do
 		if rota<255 and rotanum==1 then
 			rota=rota+5
 		end
-		if Controls.check(pad,KEY_A) and Controls.check(oldpad,KEY_A) then 
+		if Controls.check(pad,KEY_A) and Controls.check(oldpad,KEY_A) then
 			rotanum=1
 			rota=240
 		end
@@ -874,21 +868,21 @@ while true do
 			System.exit()
 			freefunction()
 			bgm = nil
-			
-		end 
+
+		end
 		elseif state=="MENU" then
 		Graphics.initBlend(TOP_SCREEN)
 		cookieshowery=cookieshowery+2
 		Graphics.drawImage(backx, backy, BackgroundTop1)
 		Graphics.drawImage(0, cookieshowery-512, cookieshower)
 		Graphics.drawImage(0, cookieshowery, cookieshower)
-		if cookieshowery>512 then cookieshowery=0 end 
+		if cookieshowery>512 then cookieshowery=0 end
 		Graphics.drawImage(0, 0, menugradient)
 		Graphics.drawImage(0, 0, menutitle)
 		gpu_drawtext(300,220,"ver: "..version,white,TOP_SCREEN)
 		screenshotmake()
 		Graphics.termBlend()
-		
+
 		Graphics.initBlend(BOTTOM_SCREEN)
 		Graphics.drawImage(backx, backy, BackgroundTop1)
 		Graphics.drawImage(-40, cookieshowery-512-275, cookieshower)
@@ -909,7 +903,7 @@ while true do
 			backx = backx + 400
 			backy = backy - 240
 		end]]--
-		
+
 		if Cookie == nil or Shine == nil or Gradient == nil or StoreHead == nil or pressed == nil or favicon == nil or cursor == nil or BackgroundSprites == nil or ObjectsSheet == nil or ButtonsSheet == nil then
 			else
 			justcurrency = 0
@@ -924,7 +918,7 @@ while true do
 			WIZARDTWR = {price = 330000000,count=0,currency = -1,name="???",tableone={},tabletwo={},upgrade=1,avupgrade=0}
 			continue()
 			state="GAME"
-		end	
+		end
 		elseif state=="OPTIONS" then
 		Graphics.initBlend(TOP_SCREEN)
 		cookieshowery=cookieshowery+2
@@ -941,7 +935,7 @@ while true do
 		Graphics.drawImage(backx, backy, BackgroundTop1)
 		Graphics.drawImage(-40, cookieshowery-512-275, cookieshower)
 		Graphics.drawImage(-40, cookieshowery-275, cookieshower)
-		
+
 		if SAVESYSTEM==0 then
 			ScreenButton(116,90,6,"RESET")
 			else
@@ -955,9 +949,9 @@ while true do
 		end
 		screenshotmake()
 		Graphics.termBlend()
-		
-		
-		
+
+
+
 	end
 	if Controls.check(pad,KEY_L) and Controls.check(pad,KEY_R) and activatescreenshot==0  then
 		System.takeScreenshot("/CookieScreenshot-"..Tm.."-"..Ts..".bmp",false)
@@ -972,7 +966,7 @@ while true do
 		state="SAVED"
 		System.showHomeMenu()
 		end
-		
+
 		-- Exit if HomeMenu calls APP_EXITING
 		if System.checkStatus() == APP_EXITING then
 		if state=="GAME" then
